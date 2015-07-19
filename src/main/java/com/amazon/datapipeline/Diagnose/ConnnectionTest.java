@@ -20,8 +20,14 @@ public class ConnnectionTest extends TestCase{
             ProcessBuilder pb = new ProcessBuilder(commands);
             Process process = pb.start();
             BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            Assert.assertEquals(stdError.readLine().length(),0);
+            int countErrorMessage = 0;
+            while(stdError.readLine() != null){
+            	countErrorMessage++;
+            }
+            stdError.close();
+            Assert.assertEquals(countErrorMessage,0);        
         } catch(Exception e){
+        	e.printStackTrace();
         	fail("not able to connect to us-west-2" + (e.getMessage() == null ? "" : "\n" + "Deatiled:" + e.getMessage()));
         }
     }
@@ -37,7 +43,12 @@ public class ConnnectionTest extends TestCase{
             ProcessBuilder pb = new ProcessBuilder(commands);
             Process process = pb.start();
             BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            Assert.assertEquals(stdError.readLine().length(),0);
+            int countErrorMessage = 0;
+            while(stdError.readLine() != null){
+            	countErrorMessage++;
+            }
+            stdError.close();
+            Assert.assertEquals(countErrorMessage,0);
         } catch(Exception e){
         	fail("not able to connect to us-east-1" + "\n" + (e.getMessage() == null ? "" : "\n" + "Deatiled:" + e.getMessage()));
         }
@@ -55,7 +66,12 @@ public class ConnnectionTest extends TestCase{
             ProcessBuilder pb = new ProcessBuilder(commands);
             Process process = pb.start();
             BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            Assert.assertEquals(stdError.readLine().length(),0);
+            int countErrorMessage = 0;
+            while(stdError.readLine() != null){
+            	countErrorMessage++;
+            }
+            stdError.close();
+            Assert.assertEquals(countErrorMessage,0);
         } catch(Exception e){
         	fail("not able to connect to eu-west-1" + "\n" + (e.getMessage() == null ? "" : "\n" + "Deatiled:" + e.getMessage()));
         }
@@ -72,7 +88,12 @@ public class ConnnectionTest extends TestCase{
             ProcessBuilder pb = new ProcessBuilder(commands);
             Process process = pb.start();
             BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            Assert.assertEquals(stdError.readLine().length(),0);
+            int countErrorMessage = 0;
+            while(stdError.readLine() != null){
+            	countErrorMessage++;
+            }
+            stdError.close();
+            Assert.assertEquals(countErrorMessage,0);
         } catch(Exception e){
         	fail("not able to connect to ap-southeast-2" + "\n" + (e.getMessage() == null ? "" : "\n" + "Deatiled:" + e.getMessage()));
         }
@@ -89,7 +110,12 @@ public class ConnnectionTest extends TestCase{
             ProcessBuilder pb = new ProcessBuilder(commands);
             Process process = pb.start();
             BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            Assert.assertEquals(stdError.readLine().length(),0);
+            int countErrorMessage = 0;
+            while(stdError.readLine() != null){
+            	countErrorMessage++;
+            }
+            stdError.close();
+            Assert.assertEquals(countErrorMessage,0);
         } catch(Exception e){
         	fail("not able to connect to ap-Northeast-1" + "\n" + (e.getMessage() == null ? "" : "\n" + "Deatiled:" + e.getMessage()));
         }
