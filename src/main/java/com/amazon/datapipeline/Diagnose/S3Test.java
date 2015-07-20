@@ -30,12 +30,8 @@ public class S3Test extends TestCase {
   Region usWest2 = Region.getRegion(Regions.US_WEST_2);
   String key = "datapipelineDiagnose-delete-me" + UUID.randomUUID();
   
-  public void setup() {
-    //s3Client.setRegion(usWest2);
-  }
-  
   @Test
-  public void testReadAccessInS3() {    
+  public void testReadAccessToS3() {    
     try {     
       List<Bucket> existingBuckets = s3Client.listBuckets();
       if (existingBuckets.size() == 0){
@@ -53,7 +49,7 @@ public class S3Test extends TestCase {
   }
   
   @Test
-  public void testUploadObjectInS3() throws IOException{
+  public void testWriteAccessToS3() throws IOException{
     try {
       List<Bucket> existingBuckets = s3Client.listBuckets();
       if (existingBuckets.size() == 0){
@@ -62,7 +58,9 @@ public class S3Test extends TestCase {
       }
       String randomClientBucket = existingBuckets.get(0).getName();
       System.out.println("\nUploading a new object (" + key + ") to S3 bucket(" + randomClientBucket + ")");
-      s3Client.putObject(new PutObjectRequest(randomClientBucket, key, createSampleFile()));     
+      s3Client.putObject(new PutObjectRequest(randomClientBucket, key, createSampleFile()));  
+      System.out.println("Deleting object (" + key + ") from S3 bucket(" + randomClientBucket + ")");
+      s3Client.deleteObject(randomClientBucket, key);
     } catch (Exception e) {
       fail("S3 create/delete object failed: " + e.getMessage());
     }
