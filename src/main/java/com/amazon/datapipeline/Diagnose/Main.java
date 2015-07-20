@@ -51,7 +51,10 @@ public class Main {
             }
         });
       testRunner.doRun(new TestSuite(ConnnectionTest.class));
-      testRunner.doRun(new TestSuite(RDSTest.class));
+      testRunner.doRun(new TestSuite(S3Test.class));      
+      testRunner.doRun(new TestSuite(RDSTest.class)); 
+      testRunner.doRun(new TestSuite(DynamoDbTest.class));
+      testRunner.doRun(new TestSuite(RedshiftTest.class));
     }
     
     private void setCredential(String filePath){
