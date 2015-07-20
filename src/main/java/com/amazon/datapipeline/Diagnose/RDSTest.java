@@ -5,7 +5,9 @@ import java.util.UUID;
 import org.junit.Test;
 
 import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.rds.AmazonRDSClient;
 import com.amazonaws.services.rds.model.CreateDBInstanceRequest;
 import com.amazonaws.services.rds.model.DBInstance;
@@ -14,11 +16,7 @@ import com.amazonaws.services.rds.model.DeleteDBInstanceRequest;
 import junit.framework.TestCase;
 
 public class RDSTest extends TestCase{
-	//AWSCredentials vaildCredentials = new BasicAWSCredentials("AKIAI2EBG2H5FBIVNUPA", "jCG/TTVbwiXyqRJ2cGEfY/Q5CpX9LudpESor0XEO");
-	//AWSCredentials invaildCredentials = new BasicAWSCredentials("AKIAILV7E3A2SPLJ3GJQ", "erdSivlSOFRam9BsCIONIVVljAeISDYm5FQiJcbb");
-	String accessId = System.getProperty("accessId");
-	String privateKey = System.getProperty("privateKey");
-	AWSCredentials credentials = new BasicAWSCredentials(accessId, privateKey);
+	AWSCredentialsProvider credentials = new DefaultAWSCredentialsProviderChain();
 	AmazonRDSClient rdsClient = new AmazonRDSClient(credentials);	
 	String id = "DataPipelinediagnose" + UUID.randomUUID().toString();
 	int storage = 5;

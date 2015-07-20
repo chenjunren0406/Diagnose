@@ -13,7 +13,7 @@ public class ConnnectionTest extends TestCase{
     public void testConnectionToUs_West_2(){
         try{
             List<String> commands = new ArrayList<String>();
-            commands.add("/sbin/ping");
+            commands.add("ping");
             commands.add("-c");
             commands.add("3");
             commands.add("datapipeline.us-west-2.amazonaws.com");
@@ -36,7 +36,7 @@ public class ConnnectionTest extends TestCase{
     public void testConnectionToUs_East_1(){
         try{
             List<String> commands = new ArrayList<String>();
-            commands.add("/sbin/ping");
+            commands.add("ping");
             commands.add("-c");
             commands.add("3");
             commands.add("datapipeline.us-east-1.amazonaws.com");
@@ -59,7 +59,7 @@ public class ConnnectionTest extends TestCase{
     public void testConnectionToEu_West_1(){
         try{
             List<String> commands = new ArrayList<String>();
-            commands.add("/sbin/ping");
+            commands.add("ping");
             commands.add("-c");
             commands.add("3");
             commands.add("datapipeline.eu-west-1.amazonaws.com");
@@ -81,7 +81,7 @@ public class ConnnectionTest extends TestCase{
     public void testConnectionToAp_SouthEast_2(){
         try{
             List<String> commands = new ArrayList<String>();
-            commands.add("/sbin/ping");
+            commands.add("ping");
             commands.add("-c");
             commands.add("3");
             commands.add("datapipeline.ap-southeast-2.amazonaws.com");
@@ -103,7 +103,7 @@ public class ConnnectionTest extends TestCase{
     public void testConnectionToAp_NorthEast_1(){
         try{
             List<String> commands = new ArrayList<String>();
-            commands.add("/sbin/ping");
+            commands.add("ping");
             commands.add("-c");
             commands.add("3");
             commands.add("datapipeline.ap-northeast-1.amazonaws.com");

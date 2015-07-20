@@ -10,6 +10,8 @@ import junit.textui.ResultPrinter;
 import junit.textui.TestRunner;
 
 import com.amazon.datapipeline.Diagnose.ConnnectionTest;
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.util.json.JSONException;
 import com.amazonaws.util.json.JSONObject;
 import com.google.common.base.Charsets;
@@ -18,13 +20,17 @@ import com.google.common.io.Files;
 public class Main {
     public static void main(String[] args) {
     	Main testRunner = new Main();
-    	if(args.length != 2 && args[0].equals("--config") && args[1].equals("--config")){
-    		System.err.println("Command: java -jar Diagnose.jar --config ~/credential.json");
-    		System.exit(255);
-    	}
-    	else{
+    	if(args.length == 2 && (args[0].equals("--config") || args[1].equals("--config"))){
     		String filePath = args[0].equals("--config") ? args[1] : args[0];
     		testRunner.setCredential(filePath);
+    		
+    	}
+    	else if(args.length == 0){
+
+    	}
+    	else{
+    		System.err.println("Command: java -jar Diagnose.jar --config ~/credential.json" + " or " + "java -jar Diagnose.jar");
+    		System.exit(255);
     	}
     	testRunner.runTest();
     }
@@ -50,11 +56,11 @@ public class Main {
                 }
             }
         });
-      testRunner.doRun(new TestSuite(ConnnectionTest.class));
-      testRunner.doRun(new TestSuite(S3Test.class));      
-      testRunner.doRun(new TestSuite(RDSTest.class)); 
-      testRunner.doRun(new TestSuite(DynamoDbTest.class));
-      testRunner.doRun(new TestSuite(RedshiftTest.class));
+        testRunner.doRun(new TestSuite(ConnnectionTest.class));
+        testRunner.doRun(new TestSuite(S3Test.class));      
+        testRunner.doRun(new TestSuite(RDSTest.class)); 
+        testRunner.doRun(new TestSuite(DynamoDbTest.class));
+        testRunner.doRun(new TestSuite(RedshiftTest.class));
     }
     
     private void setCredential(String filePath){
@@ -70,7 +76,7 @@ public class Main {
     	
     	try {
 			String privateKey = jsonObject.get("private-key").toString();
-			System.setProperty("privateKey", privateKey);
+			System.setProperty("aws.secretKey", privateKey);
 		} catch (JSONException e) {
 			System.err.println("can not find object [private-key] in " + filePath);
 			System.exit(255);
@@ -78,7 +84,7 @@ public class Main {
     	
     	try {
 			String accessId = jsonObject.get("access-id").toString();
-			System.setProperty("accessId", accessId);
+			System.setProperty("aws.accessKeyId", accessId);
 		} catch (JSONException e) {
 			System.err.println("can not find object [access-id] in " + filePath);
 			System.exit(255);

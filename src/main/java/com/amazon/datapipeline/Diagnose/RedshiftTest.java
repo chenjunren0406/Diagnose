@@ -16,16 +16,16 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.redshift.AmazonRedshiftClient;
 import com.amazonaws.services.redshift.model.Cluster;
 import com.google.common.base.Throwables;
 
 public class RedshiftTest extends TestCase {
   
-  String accessId = System.getProperty("accessId");
-  String privateKey = System.getProperty("privateKey");
-  AWSCredentials credentials = new BasicAWSCredentials(accessId, privateKey);
+  AWSCredentialsProvider credentials = new DefaultAWSCredentialsProviderChain();
   AmazonRedshiftClient redshiftClient = new AmazonRedshiftClient(credentials);
   
   @Test

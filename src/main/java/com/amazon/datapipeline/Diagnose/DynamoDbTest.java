@@ -7,7 +7,9 @@ import java.util.UUID;
 import org.junit.Test;
 
 import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Table;
@@ -23,9 +25,7 @@ import junit.framework.TestCase;
 
 public class DynamoDbTest extends TestCase {
 
-  String accessId = System.getProperty("accessId");
-  String privateKey = System.getProperty("privateKey");
-  AWSCredentials credentials = new BasicAWSCredentials(accessId, privateKey);
+  AWSCredentialsProvider credentials = new DefaultAWSCredentialsProviderChain();
   AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentials);
   DynamoDB dynamoDB = new DynamoDB(ddbClient);
   String tableName = "datapipelineDiagnose-delete-me" + UUID.randomUUID();
@@ -36,13 +36,13 @@ public class DynamoDbTest extends TestCase {
       TableCollection<ListTablesResult> tables = dynamoDB.listTables();
       Iterator<Table> iterator = tables.iterator();
       if (!iterator.hasNext()) {
-        System.out.println("\nNo tables found");
+        //System.out.println("\nNo tables found");
         return;
       } else {
-        System.out.println("\nListing existing table names:");
+        //System.out.println("\nListing existing table names:");
         while (iterator.hasNext()) {
           Table table = iterator.next();
-          System.out.println("-" + table.getTableName());
+          //System.out.println("-" + table.getTableName());
         } 
       }
     } catch (Exception e) {
@@ -71,13 +71,13 @@ public class DynamoDbTest extends TestCase {
         .withReadCapacityUnits(5L)
         .withWriteCapacityUnits(6L));
 
-      System.out.println("Issuing CreateTable request for " + tableName);
+      //System.out.println("Issuing CreateTable request for " + tableName);
       Table table = dynamoDB.createTable(request);
-      System.out.println("Waiting for " + tableName + " to be created...");
+      //System.out.println("Waiting for " + tableName + " to be created...");
       table.waitForActive();
-      System.out.println("Issuing DeleteTable request for " + tableName);
+      //System.out.println("Issuing DeleteTable request for " + tableName);
       table.delete();
-      System.out.println("Waiting for " + tableName + " to be deleted...");
+      //System.out.println("Waiting for " + tableName + " to be deleted...");
       table.waitForDelete();
     } catch (Exception e) {
       fail("DynamoDb create/delete table failed: " + e.getMessage());

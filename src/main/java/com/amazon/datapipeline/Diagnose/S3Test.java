@@ -12,8 +12,8 @@ import org.junit.Test;
 
 import junit.framework.TestCase;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
@@ -23,9 +23,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 
 public class S3Test extends TestCase {
   
-  String accessId = System.getProperty("accessId");
-  String privateKey = System.getProperty("privateKey");
-  AWSCredentials credentials = new BasicAWSCredentials(accessId, privateKey);
+  AWSCredentialsProvider credentials = new DefaultAWSCredentialsProviderChain();
   AmazonS3 s3Client = new AmazonS3Client(credentials);
   Region usWest2 = Region.getRegion(Regions.US_WEST_2);
   String key = "datapipelineDiagnose-delete-me" + UUID.randomUUID();
