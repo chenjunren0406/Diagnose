@@ -33,12 +33,12 @@ public class RedshiftTest extends TestCase {
     try {
       List <Cluster> existingClusters = redshiftClient.describeClusters().getClusters();
       if (existingClusters.size() == 0){
-        System.out.println("\nNo clusters found");
+        //System.out.println("\nNo clusters found");
         return;
       } else {
-        System.out.println("\nExisting clusters:");
+        //System.out.println("\nExisting clusters:");
         for (Cluster cluster : existingClusters) {
-          System.out.println(" - " + cluster.getClusterIdentifier());
+          //System.out.println(" - " + cluster.getClusterIdentifier());
         }
       }    
     } catch (Exception e) {

@@ -33,12 +33,12 @@ public class S3Test extends TestCase {
     try {     
       List<Bucket> existingBuckets = s3Client.listBuckets();
       if (existingBuckets.size() == 0){
-        System.out.println("\nNo buckets found)");
+        //System.out.println("\nNo buckets found)");
         return;
       } else {
-        System.out.println("\nExisting buckets:");
+        //System.out.println("\nExisting buckets:");
         for (Bucket bucket : existingBuckets) {
-          System.out.println(" - " + bucket.getName());
+          //System.out.println(" - " + bucket.getName());
         }
       }
     } catch (Exception e) {
@@ -55,9 +55,9 @@ public class S3Test extends TestCase {
         return;
       }
       String randomClientBucket = existingBuckets.get(0).getName();
-      System.out.println("\nUploading a new object (" + key + ") to S3 bucket(" + randomClientBucket + ")");
+      //System.out.println("\nUploading a new object (" + key + ") to S3 bucket(" + randomClientBucket + ")");
       s3Client.putObject(new PutObjectRequest(randomClientBucket, key, createSampleFile()));  
-      System.out.println("Deleting object (" + key + ") from S3 bucket(" + randomClientBucket + ")");
+      //System.out.println("Deleting object (" + key + ") from S3 bucket(" + randomClientBucket + ")");
       s3Client.deleteObject(randomClientBucket, key);
     } catch (Exception e) {
       fail("S3 create/delete object failed: " + e.getMessage());
