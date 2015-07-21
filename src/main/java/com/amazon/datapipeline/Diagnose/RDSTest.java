@@ -35,7 +35,7 @@ public class RDSTest extends TestCase{
 	}
 	
 	@Test
-	public void testCreateDBInRDS(){
+	public void testCreateAndDeleteDBAccessInRDS(){
 		try{
 			CreateDBInstanceRequest request = new CreateDBInstanceRequest(id,storage,dbInstanceClass,engine,user,pwd);
 			DBInstance test_instance = rdsClient.createDBInstance(request);
